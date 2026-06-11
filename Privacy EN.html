@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Particle design Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2A4A;--ink:#33425C;--soft:#6E7B92;--line:#E6EBF3;--line-2:#D9E1EC;
+    --bg:#FFFFFF;--bg-soft:#F5F8FC;--cyan:#27A7D8;--emerald:#33B98C;--purple:#8E7CDC;
+    --jp:'Zen Kaku Gothic New', sans-serif;--en:'Manrope', sans-serif;--mincho:'Shippori Mincho', serif;
+    --sp:80px;--rad:4px;--maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--en);color:var(--ink);background:var(--bg);font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased;letter-spacing:.01em;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 40px;}
+
+  .eyebrow{font-family:var(--en);font-weight:700;font-size:12px;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--cyan);border-radius:2px;}
+  .eyebrow .jp{font-family:var(--en);font-weight:500;color:var(--soft);letter-spacing:.08em;}
+  h2.sec-title{font-family:var(--en);font-weight:700;font-size:32px;line-height:1.45;color:var(--navy);margin:18px 0 0;letter-spacing:.02em;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--en);font-weight:500;font-size:15px;padding:13px 26px;border-radius:var(--rad);border:1.5px solid transparent;cursor:pointer;transition:.2s;}
+  .btn .ar{font-family:var(--en);font-weight:700;transition:transform .2s;}
+  .btn:hover .ar{transform:translateX(3px);}
+  .btn-primary{background:var(--navy);color:#fff;}
+  .btn-primary:hover{background:var(--cyan);}
+
+  /* header */
+  header.site{position:sticky;top:0;z-index:50;height:72px;display:flex;align-items:center;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  header.site .container{display:flex;align-items:center;gap:30px;width:100%;}
+  .brand{display:flex;align-items:center;gap:11px;}
+  .brand .logo{height:34px;width:auto;display:block;}
+  .fbrand .logo{height:34px;filter:brightness(0) invert(1);opacity:.92;}
+  nav.main{display:flex;gap:26px;margin-left:8px;}
+  nav.main a{font-size:14px;color:var(--ink);position:relative;padding:4px 0;}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--cyan);transition:width .22s;}
+  nav.main a:hover{color:var(--navy);}
+  nav.main a:hover::after{width:100%;}
+  .head-right{margin-left:auto;display:flex;align-items:center;gap:18px;}
+  .lang{font-family:var(--en);font-weight:600;font-size:13px;color:var(--soft);display:flex;gap:7px;}
+  .lang b{color:var(--navy);}
+  .lang span{color:var(--line-2);}
+  .lang a:hover{color:var(--cyan);}
+  .nav-toggle{display:none;margin-left:6px;width:42px;height:42px;border:none;background:transparent;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0;}
+  .nav-toggle span{width:22px;height:2px;background:var(--navy);border-radius:2px;transition:.25s;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mnav{display:none;position:fixed;top:72px;left:0;right:0;z-index:49;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;padding:10px 40px 26px;box-shadow:0 22px 44px -24px rgba(27,42,74,.34);transform:translateY(-14px);opacity:0;visibility:hidden;transition:transform .25s ease,opacity .25s ease,visibility .25s;}
+  .mnav.open{transform:translateY(0);opacity:1;visibility:visible;}
+  .mnav a.mlink{font-size:16px;color:var(--ink);padding:15px 2px;border-bottom:1px solid var(--line);}
+  .mnav a.mlink:hover{color:var(--cyan);}
+  .mnav .mfoot{display:flex;align-items:center;gap:16px;margin-top:20px;}
+  .mnav .mfoot .btn-primary{flex:1;justify-content:center;}
+
+  /* page intro band */
+  .page-head{background:var(--bg-soft);border-bottom:1px solid var(--line);padding:60px 0 56px;position:relative;overflow:hidden;}
+  .page-head::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 110% at 88% 10%,rgba(39,167,216,.09),transparent 60%),radial-gradient(50% 110% at 8% 92%,rgba(142,124,220,.09),transparent 60%);}
+  .page-head .container{position:relative;z-index:2;}
+  .page-head .meta{margin-top:14px;font-size:13.5px;color:var(--soft);display:flex;gap:22px;flex-wrap:wrap;}
+  .page-head .meta span b{color:var(--ink);font-weight:700;}
+
+  /* policy body */
+  .policy{padding:64px 0 var(--sp);}
+  .policy .container{max-width:880px;}
+  .policy .intro{font-size:15.5px;color:var(--ink);margin:0 0 12px;}
+  .art{margin-top:42px;}
+  .art:first-of-type{margin-top:8px;}
+  .art h3{font-family:var(--en);font-weight:700;font-size:19px;color:var(--navy);margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--line);letter-spacing:.02em;display:flex;align-items:baseline;gap:12px;}
+  .art h3 .anum{font-family:var(--en);font-weight:800;font-size:13px;color:var(--cyan);letter-spacing:.08em;flex:none;}
+  .art p{font-size:15px;color:var(--ink);margin:0 0 14px;}
+  .art p:last-child{margin-bottom:0;}
+  .art ol,.art ul{margin:0 0 14px;padding-left:1.4em;}
+  .art li{font-size:15px;color:var(--ink);margin-bottom:7px;line-height:1.85;}
+  .art ul.dash{list-style:none;padding-left:0;}
+  .art ul.dash li{position:relative;padding-left:1.1em;}
+  .art ul.dash li::before{content:"・";position:absolute;left:0;color:var(--soft);}
+  .art .note{font-size:13px;color:var(--soft);background:var(--bg-soft);border-left:3px solid var(--line-2);padding:12px 16px;border-radius:0 6px 6px 0;margin-top:8px;}
+  .contact-box{margin-top:16px;border:1px solid var(--line);border-radius:12px;background:var(--bg-soft);padding:24px 26px;}
+  .contact-box .crow{display:grid;grid-template-columns:130px 1fr;gap:10px 18px;font-size:15px;}
+  .contact-box .crow dt{color:var(--soft);font-weight:700;}
+  .contact-box .crow dd{margin:0;color:var(--navy);}
+  .policy .end{margin-top:40px;text-align:right;font-size:15px;color:var(--soft);}
+  .policy .back{margin-top:36px;}
+
+  /* footer */
+  footer.site{background:#13203A;color:#A9B6CE;padding:64px 0 28px;}
+  footer.site .top{display:flex;justify-content:space-between;gap:50px;flex-wrap:wrap;}
+  footer.site .fbrand{max-width:340px;}
+  footer.site .fbrand p{font-size:13.5px;color:#8593AE;margin:18px 0 0;line-height:1.85;}
+  .fnav{display:flex;gap:64px;flex-wrap:wrap;}
+  .fcol{display:flex;flex-direction:column;gap:12px;}
+  .fcol .fh{font-family:var(--en);font-weight:700;font-size:11px;letter-spacing:.16em;color:#5F6E8C;text-transform:uppercase;margin-bottom:4px;}
+  .fcol a{font-size:14px;color:#A9B6CE;transition:.2s;}
+  .fcol a:hover{color:#7FD2EE;}
+  .fbottom{margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:#5F6E8C;font-family:var(--en);}
+  .fbottom a:hover{color:#7FD2EE;}
+
+  @media(max-width:980px){
+    nav.main,.head-right .lang,.head-right .btn-primary{display:none;}
+    .nav-toggle{display:flex;}
+    .mnav{display:flex;}
+  }
+  @media(max-width:620px){
+    :root{--sp:56px;}
+    .container{padding:0 22px;}
+    h2.sec-title{font-size:25px;}
+    .mnav{padding:10px 22px 24px;}
+    .contact-box .crow{grid-template-columns:1fr;gap:2px 0;}
+    .contact-box .crow dt{margin-top:10px;}
+    footer.site .top{gap:32px;}
+    .fnav{gap:36px;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site">
+    <div class="container">
+      <a class="brand" href="Particle design Top EN.html">
+        <img class="logo" src="assets/logo.png" alt="Particle design">
+      </a>
+      <nav class="main">
+        <a href="Particle design Top EN.html#about">About</a>
+        <a href="Particle design Top EN.html#mission">Mission</a>
+        <a href="Particle design Top EN.html#services">Services</a>
+        <a href="Particle design Top EN.html#wwd">What We Do</a>
+        <a href="Particle design Top EN.html#how">How We Work</a>
+        <a href="Particle design Top EN.html#news">News</a>
+        <a href="Company EN.html">Company</a>
+      </nav>
+      <div class="head-right">
+        <div class="lang"><a href="Privacy.html">JP</a><span>/</span><b>EN</b></div>
+        <a href="Particle design Top EN.html#contact" class="btn btn-primary">Contact <span class="ar">→</span></a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mnav" id="mnav">
+      <a class="mlink" href="Particle design Top EN.html#about">About <span style="color:var(--soft);font-size:13px">/ Philosophy</span></a>
+      <a class="mlink" href="Particle design Top EN.html#mission">Mission <span style="color:var(--soft);font-size:13px">/ The Challenge</span></a>
+      <a class="mlink" href="Particle design Top EN.html#services">Services <span style="color:var(--soft);font-size:13px">/ Business Areas</span></a>
+      <a class="mlink" href="Particle design Top EN.html#wwd">What We Do <span style="color:var(--soft);font-size:13px">/ Our Value</span></a>
+      <a class="mlink" href="Particle design Top EN.html#how">How We Work <span style="color:var(--soft);font-size:13px">/ How We Partner</span></a>
+      <a class="mlink" href="Particle design Top EN.html#news">News <span style="color:var(--soft);font-size:13px">/ Updates</span></a>
+      <a class="mlink" href="Company EN.html">Company <span style="color:var(--soft);font-size:13px">/ Company</span></a>
+      <div class="mfoot">
+        <a href="Particle design Top EN.html#contact" class="btn btn-primary">Contact <span class="ar">→</span></a>
+        <div class="lang"><a href="Privacy.html">JP</a><span>/</span><b>EN</b></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== PAGE HEAD ===================== -->
+  <section class="page-head">
+    <div class="container">
+      <span class="eyebrow">Privacy Policy <span class="jp">/ Privacy</span></span>
+      <h2 class="sec-title">Privacy Policy</h2>
+      <div class="meta">
+        <span>Effective date: <b>June 5, 2026</b></span>
+        <span>Last updated: <b>June 5, 2026</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== POLICY BODY ===================== -->
+  <section class="policy">
+    <div class="container">
+      <p class="intro">Particle design Inc. (the “Company”) handles the personal information it obtains through the website it operates (the “Site”) and through its business-concept and business-development support, PMO support, DX / data-utilization support, operations design, technology-implementation support, product-development support and related services (collectively, the “Services”) appropriately and in compliance with the Act on the Protection of Personal Information and other relevant laws and guidelines, as set out below.</p>
+
+      <div class="art">
+        <h3><span class="anum">Article 1</span>Basic Policy</h3>
+        <p>The Company recognizes that personal information is important information about individuals, obtains it by lawful and fair means, and uses it appropriately within the scope of its purposes of use.</p>
+        <p>The Company also takes necessary and appropriate security control measures to prevent leakage, loss, damage, unauthorized access and the like with respect to the personal information it obtains.</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 2</span>Scope of Application</h3>
+        <p>This Privacy Policy applies to the handling of personal information obtained by the Company in connection with the Site and the Services.</p>
+        <p>For the handling of personal information on external sites or services linked from the Site, please refer to the privacy policies established by those external sites or services.</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 3</span>Information We Obtain</h3>
+        <p>The Company may obtain the following information.</p>
+        <ol>
+          <li>Information obtained at the time of inquiry
+            <ul class="dash">
+              <li>Name</li>
+              <li>Company name, department, job title</li>
+              <li>Email address</li>
+              <li>Phone number</li>
+              <li>Consultation topic</li>
+              <li>Inquiry content</li>
+              <li>Other information you provide via the inquiry form, email or otherwise</li>
+            </ul>
+          </li>
+          <li>Information obtained in connection with negotiations, contracts and the performance of work
+            <ul class="dash">
+              <li>Business card information</li>
+              <li>Contact information</li>
+              <li>Information on contracts, billing, payment and other transactions</li>
+              <li>Information necessary for meetings, discussions, proposals and the performance of work</li>
+            </ul>
+          </li>
+          <li>Information obtained automatically through use of the Site
+            <ul class="dash">
+              <li>IP address</li>
+              <li>Information about the usage environment such as browser, device and OS</li>
+              <li>Access logs such as pages viewed, date and time of viewing, and referrer</li>
+              <li>Information obtained through cookies and other similar technologies</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 4</span>Purposes of Use</h3>
+        <p>The Company uses the personal information it obtains for the following purposes.</p>
+        <ol>
+          <li>To respond to inquiries, consultations, requests for materials and the like</li>
+          <li>For communication, proposals, estimates, contracts, performance of work, billing, payment and other transaction management relating to the Services</li>
+          <li>To provide and improve business-concept, business-development, PMO, DX / data-utilization, operations-design, technology-implementation and product-development support and the like</li>
+          <li>To provide information about the Company’s services, activities, events, seminars, articles and materials</li>
+          <li>For operation, maintenance and improvement of the Site and analysis of usage</li>
+          <li>To address fraud, nuisance behavior and security issues</li>
+          <li>To exercise rights or perform obligations under laws, contracts, internal rules and the like</li>
+          <li>For purposes incidental or related to the above</li>
+        </ol>
+        <p>Except where permitted by law, the Company does not use personal information beyond the scope of the purposes of use it has announced or notified in advance.</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 5</span>Provision to Third Parties</h3>
+        <p>Except in the following cases, the Company does not provide personal data to third parties without the consent of the individual.</p>
+        <ol>
+          <li>Where based on laws and regulations</li>
+          <li>Where necessary to protect the life, body or property of a person and it is difficult to obtain the individual’s consent</li>
+          <li>Where particularly necessary for improving public health or promoting the sound development of children and it is difficult to obtain the individual’s consent</li>
+          <li>Where it is necessary to cooperate with a national agency, local government or a party entrusted by them in performing duties prescribed by law, and obtaining the individual’s consent may impede the performance of those duties</li>
+          <li>Where personal data is provided in connection with a business succession</li>
+          <li>In other cases permitted by law</li>
+        </ol>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 6</span>Outsourcing</h3>
+        <p>The Company may outsource all or part of its handling of personal information to external contractors to the extent necessary to achieve the purposes of use.</p>
+        <p>In such cases, the Company exercises necessary and appropriate supervision over the contractors. Such contractors may include the following.</p>
+        <ul class="dash">
+          <li>Providers of systems such as servers, cloud, email, forms and storage</li>
+          <li>Providers supporting website production, maintenance and access analysis</li>
+          <li>Providers supporting accounting, legal, labor and other professional services</li>
+        </ul>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 7</span>Joint Use</h3>
+        <p>Where the Company jointly uses personal information with specific third parties, it will, in accordance with law, announce in advance the items of personal information to be jointly used, the scope of joint users, their purposes of use, the party responsible for management and other necessary matters.</p>
+        <p>As of the establishment of this Privacy Policy, no joint use with specific third parties is planned for personal information obtained through inquiries on the Site.</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 8</span>Use of Cookies and Access Analysis Tools</h3>
+        <p>The Company may use cookies and other similar technologies to improve the convenience of the Site, understand and improve usage, and ensure security.</p>
+        <p>The Company may use external services such as Google Analytics to analyze access to the Site. These services may use cookies and the like to collect access information in a form that does not directly identify individuals.</p>
+        <p>Users can disable cookies through their browser settings. However, if cookies are disabled, some features of the Site may become unavailable.</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 9</span>Security Control Measures</h3>
+        <p>To prevent leakage, loss, damage, unauthorized access and the like of the personal data it handles, the Company takes necessary and appropriate security control measures, including the following.</p>
+        <ol>
+          <li>Clarifying the person responsible for handling personal information and the scope of such handling</li>
+          <li>Limiting those who can access personal information and managing access rights</li>
+          <li>Appropriate management of devices, accounts, cloud services and the like that handle personal information</li>
+          <li>Technical security measures such as passwords, two-factor authentication and encryption of communications</li>
+          <li>Necessary and appropriate supervision of employees, officers, contractors and others who handle personal information</li>
+          <li>Confirming how contractors handle personal information and taking necessary contractual measures</li>
+        </ol>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 10</span>Disclosure, Correction, Suspension of Use, etc.</h3>
+        <p>Individuals may request notification of the purpose of use, disclosure, correction, addition, deletion, suspension of use, erasure, suspension of provision to third parties, and disclosure of records of provision to third parties, with respect to their retained personal data held by the Company.</p>
+        <p>Upon receiving such a request from an individual, the Company will verify the individual’s identity and respond within a reasonable period and scope in accordance with law.</p>
+        <p>However, the Company may be unable to respond where it is not obligated to do so under law or where the individual’s identity cannot be verified.</p>
+        <p>If the Company sets a fee for requests for disclosure and the like, it will announce or notify the details in advance.</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 11</span>Retention Period of Personal Information</h3>
+        <p>The Company retains personal information to the extent necessary to achieve the purposes of use.</p>
+        <p>When the retention period has elapsed or the information is no longer needed because the purpose of use has been achieved, the Company will delete or anonymize it by appropriate means, or take other necessary measures, except where retention is required by law.</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 12</span>Provision to Third Parties in Foreign Countries</h3>
+        <p>Where it is necessary to provide personal data to third parties in foreign countries, the Company will, in accordance with law, obtain the individual’s consent, provide information, confirm that the recipient has equivalent measures in place, and take other necessary actions.</p>
+        <p>In addition, where operators located in foreign countries may handle personal information through the use of cloud services, access-analysis tools, form services and the like, the Company will, as necessary, confirm the security management systems, country of location and personal-information protection regimes of such external services and strive to handle the information appropriately.</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 13</span>Contact for Inquiries</h3>
+        <p>For this Privacy Policy, the Company’s handling of personal information, requests for disclosure and the like, complaints or consultations, please contact us at the following.</p>
+        <div class="contact-box">
+          <dl class="crow">
+            <dt>Company</dt><dd>Particle design Inc.</dd>
+            <dt>Representative</dt><dd>Tomohito Wajima, Representative Director</dd>
+            <dt>Address</dt><dd>H1O Hamamatsucho 818, 1-2-14 Shibadaimon, Minato-ku, Tokyo</dd>
+            <dt>Contact</dt><dd>Please reach us via the inquiry form on this Site</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">Article 14</span>Changes to this Privacy Policy</h3>
+        <p>The Company may change this Privacy Policy as necessary due to amendments to laws, changes in its business, changes in its handling of personal information or other reasons.</p>
+        <p>The amended content takes effect from the time it is posted on the Site. However, for changes that require the individual’s consent under law, the Company will carry out appropriate procedures in accordance with law.</p>
+      </div>
+
+      <p class="end">End</p>
+
+      <div class="back">
+        <a href="Particle design Top EN.html" class="btn btn-primary">Back to top <span class="ar">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site">
+    <div class="container">
+      <div class="top">
+        <div class="fbrand">
+          <a class="brand" href="Particle design Top EN.html"><img class="logo" src="assets/logo.png" alt="Particle design"></a>
+          <p>Strategy, Technology, and Execution for New Business Creation. We find, connect and shape the possibilities within your company.</p>
+        </div>
+        <div class="fnav">
+          <div class="fcol">
+            <span class="fh">Sitemap</span>
+            <a href="Particle design Top EN.html#about">About</a>
+            <a href="Particle design Top EN.html#mission">Mission</a>
+            <a href="Particle design Top EN.html#services">Services</a>
+            <a href="Particle design Top EN.html#wwd">What We Do</a>
+          </div>
+          <div class="fcol">
+            <span class="fh">&nbsp;</span>
+            <a href="Particle design Top EN.html#how">How We Work</a>
+            <a href="Particle design Top EN.html#news">News</a>
+            <a href="Company EN.html">Company</a>
+            <a href="Particle design Top EN.html#contact">Contact</a>
+          </div>
+          <div class="fcol">
+            <span class="fh">Language</span>
+            <a href="Privacy.html">日本語</a>
+            <a href="Privacy EN.html">English</a>
+          </div>
+        </div>
+      </div>
+      <div class="fbottom">
+        <span>© 2026 Particle design Inc.</span>
+        <a href="Privacy EN.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  (function(){
+    const t=document.getElementById('navToggle'), m=document.getElementById('mnav');
+    if(!t||!m)return;
+    t.addEventListener('click',()=>{t.classList.toggle('open');m.classList.toggle('open');});
+    m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{t.classList.remove('open');m.classList.remove('open');}));
+  })();
+</script>
+</body>
+</html>

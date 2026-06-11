@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プライバシーポリシー ｜ Particle design 株式会社</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2A4A;--ink:#33425C;--soft:#6E7B92;--line:#E6EBF3;--line-2:#D9E1EC;
+    --bg:#FFFFFF;--bg-soft:#F5F8FC;--cyan:#27A7D8;--emerald:#33B98C;--purple:#8E7CDC;
+    --jp:'Zen Kaku Gothic New', sans-serif;--en:'Manrope', sans-serif;--mincho:'Shippori Mincho', serif;
+    --sp:80px;--rad:4px;--maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--jp);color:var(--ink);background:var(--bg);font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased;letter-spacing:.01em;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 40px;}
+
+  .eyebrow{font-family:var(--en);font-weight:700;font-size:12px;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--cyan);border-radius:2px;}
+  .eyebrow .jp{font-family:var(--jp);font-weight:500;color:var(--soft);letter-spacing:.08em;}
+  h2.sec-title{font-family:var(--jp);font-weight:700;font-size:32px;line-height:1.45;color:var(--navy);margin:18px 0 0;letter-spacing:.02em;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--jp);font-weight:500;font-size:15px;padding:13px 26px;border-radius:var(--rad);border:1.5px solid transparent;cursor:pointer;transition:.2s;}
+  .btn .ar{font-family:var(--en);font-weight:700;transition:transform .2s;}
+  .btn:hover .ar{transform:translateX(3px);}
+  .btn-primary{background:var(--navy);color:#fff;}
+  .btn-primary:hover{background:var(--cyan);}
+
+  /* header */
+  header.site{position:sticky;top:0;z-index:50;height:72px;display:flex;align-items:center;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  header.site .container{display:flex;align-items:center;gap:30px;width:100%;}
+  .brand{display:flex;align-items:center;gap:11px;}
+  .brand .logo{height:34px;width:auto;display:block;}
+  .fbrand .logo{height:34px;filter:brightness(0) invert(1);opacity:.92;}
+  nav.main{display:flex;gap:26px;margin-left:8px;}
+  nav.main a{font-size:14px;color:var(--ink);position:relative;padding:4px 0;}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--cyan);transition:width .22s;}
+  nav.main a:hover{color:var(--navy);}
+  nav.main a:hover::after{width:100%;}
+  .head-right{margin-left:auto;display:flex;align-items:center;gap:18px;}
+  .lang{font-family:var(--en);font-weight:600;font-size:13px;color:var(--soft);display:flex;gap:7px;}
+  .lang b{color:var(--navy);}
+  .lang span{color:var(--line-2);}
+  .lang a:hover{color:var(--cyan);}
+  .nav-toggle{display:none;margin-left:6px;width:42px;height:42px;border:none;background:transparent;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0;}
+  .nav-toggle span{width:22px;height:2px;background:var(--navy);border-radius:2px;transition:.25s;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mnav{display:none;position:fixed;top:72px;left:0;right:0;z-index:49;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;padding:10px 40px 26px;box-shadow:0 22px 44px -24px rgba(27,42,74,.34);transform:translateY(-14px);opacity:0;visibility:hidden;transition:transform .25s ease,opacity .25s ease,visibility .25s;}
+  .mnav.open{transform:translateY(0);opacity:1;visibility:visible;}
+  .mnav a.mlink{font-size:16px;color:var(--ink);padding:15px 2px;border-bottom:1px solid var(--line);}
+  .mnav a.mlink:hover{color:var(--cyan);}
+  .mnav .mfoot{display:flex;align-items:center;gap:16px;margin-top:20px;}
+  .mnav .mfoot .btn-primary{flex:1;justify-content:center;}
+
+  /* page intro band */
+  .page-head{background:var(--bg-soft);border-bottom:1px solid var(--line);padding:60px 0 56px;position:relative;overflow:hidden;}
+  .page-head::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 110% at 88% 10%,rgba(39,167,216,.09),transparent 60%),radial-gradient(50% 110% at 8% 92%,rgba(142,124,220,.09),transparent 60%);}
+  .page-head .container{position:relative;z-index:2;}
+  .page-head .meta{margin-top:14px;font-size:13.5px;color:var(--soft);display:flex;gap:22px;flex-wrap:wrap;}
+  .page-head .meta span b{color:var(--ink);font-weight:700;}
+
+  /* policy body */
+  .policy{padding:64px 0 var(--sp);}
+  .policy .container{max-width:880px;}
+  .policy .intro{font-size:15.5px;color:var(--ink);margin:0 0 12px;}
+  .art{margin-top:42px;}
+  .art:first-of-type{margin-top:8px;}
+  .art h3{font-family:var(--jp);font-weight:700;font-size:19px;color:var(--navy);margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid var(--line);letter-spacing:.02em;display:flex;align-items:baseline;gap:12px;}
+  .art h3 .anum{font-family:var(--en);font-weight:800;font-size:13px;color:var(--cyan);letter-spacing:.08em;flex:none;}
+  .art p{font-size:15px;color:var(--ink);margin:0 0 14px;}
+  .art p:last-child{margin-bottom:0;}
+  .art ol,.art ul{margin:0 0 14px;padding-left:1.4em;}
+  .art li{font-size:15px;color:var(--ink);margin-bottom:7px;line-height:1.85;}
+  .art ul.dash{list-style:none;padding-left:0;}
+  .art ul.dash li{position:relative;padding-left:1.1em;}
+  .art ul.dash li::before{content:"・";position:absolute;left:0;color:var(--soft);}
+  .art .note{font-size:13px;color:var(--soft);background:var(--bg-soft);border-left:3px solid var(--line-2);padding:12px 16px;border-radius:0 6px 6px 0;margin-top:8px;}
+  .contact-box{margin-top:16px;border:1px solid var(--line);border-radius:12px;background:var(--bg-soft);padding:24px 26px;}
+  .contact-box .crow{display:grid;grid-template-columns:130px 1fr;gap:10px 18px;font-size:15px;}
+  .contact-box .crow dt{color:var(--soft);font-weight:700;}
+  .contact-box .crow dd{margin:0;color:var(--navy);}
+  .policy .end{margin-top:40px;text-align:right;font-size:15px;color:var(--soft);}
+  .policy .back{margin-top:36px;}
+
+  /* footer */
+  footer.site{background:#13203A;color:#A9B6CE;padding:64px 0 28px;}
+  footer.site .top{display:flex;justify-content:space-between;gap:50px;flex-wrap:wrap;}
+  footer.site .fbrand{max-width:340px;}
+  footer.site .fbrand p{font-size:13.5px;color:#8593AE;margin:18px 0 0;line-height:1.85;}
+  .fnav{display:flex;gap:64px;flex-wrap:wrap;}
+  .fcol{display:flex;flex-direction:column;gap:12px;}
+  .fcol .fh{font-family:var(--en);font-weight:700;font-size:11px;letter-spacing:.16em;color:#5F6E8C;text-transform:uppercase;margin-bottom:4px;}
+  .fcol a{font-size:14px;color:#A9B6CE;transition:.2s;}
+  .fcol a:hover{color:#7FD2EE;}
+  .fbottom{margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:#5F6E8C;font-family:var(--en);}
+  .fbottom a:hover{color:#7FD2EE;}
+
+  @media(max-width:980px){
+    nav.main,.head-right .lang,.head-right .btn-primary{display:none;}
+    .nav-toggle{display:flex;}
+    .mnav{display:flex;}
+  }
+  @media(max-width:620px){
+    :root{--sp:56px;}
+    .container{padding:0 22px;}
+    h2.sec-title{font-size:25px;}
+    .mnav{padding:10px 22px 24px;}
+    .contact-box .crow{grid-template-columns:1fr;gap:2px 0;}
+    .contact-box .crow dt{margin-top:10px;}
+    footer.site .top{gap:32px;}
+    .fnav{gap:36px;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site">
+    <div class="container">
+      <a class="brand" href="Particle design Top.html">
+        <img class="logo" src="assets/logo.png" alt="Particle design">
+      </a>
+      <nav class="main">
+        <a href="Particle design Top.html#about">About</a>
+        <a href="Particle design Top.html#mission">Mission</a>
+        <a href="Particle design Top.html#services">Services</a>
+        <a href="Particle design Top.html#wwd">What We Do</a>
+        <a href="Particle design Top.html#how">How We Work</a>
+        <a href="Particle design Top.html#news">News</a>
+        <a href="Company.html">Company</a>
+      </nav>
+      <div class="head-right">
+        <div class="lang"><b>JP</b><span>/</span><a href="Privacy EN.html">EN</a></div>
+        <a href="Particle design Top.html#contact" class="btn btn-primary">Contact <span class="ar">→</span></a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mnav" id="mnav">
+      <a class="mlink" href="Particle design Top.html#about">About <span style="color:var(--soft);font-size:13px">／ 企業理念</span></a>
+      <a class="mlink" href="Particle design Top.html#mission">Mission <span style="color:var(--soft);font-size:13px">／ 課題提起</span></a>
+      <a class="mlink" href="Particle design Top.html#services">Services <span style="color:var(--soft);font-size:13px">／ 事業領域</span></a>
+      <a class="mlink" href="Particle design Top.html#wwd">What We Do <span style="color:var(--soft);font-size:13px">／ 提供価値</span></a>
+      <a class="mlink" href="Particle design Top.html#how">How We Work <span style="color:var(--soft);font-size:13px">／ 伴走支援</span></a>
+      <a class="mlink" href="Particle design Top.html#news">News <span style="color:var(--soft);font-size:13px">／ お知らせ</span></a>
+      <a class="mlink" href="Company.html">Company <span style="color:var(--soft);font-size:13px">／ 会社概要</span></a>
+      <div class="mfoot">
+        <a href="Particle design Top.html#contact" class="btn btn-primary">Contact <span class="ar">→</span></a>
+        <div class="lang"><b>JP</b><span>/</span><a href="Privacy EN.html">EN</a></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== PAGE HEAD ===================== -->
+  <section class="page-head">
+    <div class="container">
+      <span class="eyebrow">Privacy Policy <span class="jp">／ プライバシーポリシー</span></span>
+      <h2 class="sec-title">プライバシーポリシー</h2>
+      <div class="meta">
+        <span>制定日：<b>2026年6月5日</b></span>
+        <span>最終更新日：<b>2026年6月5日</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== POLICY BODY ===================== -->
+  <section class="policy">
+    <div class="container">
+      <p class="intro">　Particle design 株式会社（以下「当社」といいます。）は、当社が運営するウェブサイト（以下「本サイト」といいます。）および当社が提供する事業構想・事業開発支援、PMO支援、DX/データ活用支援、業務設計、技術実装支援、プロダクト開発支援その他これらに関連する業務（以下総称して「本サービス」といいます。）において取得する個人情報について、個人情報の保護に関する法律その他関係法令・ガイドラインを遵守し、以下のとおり適切に取り扱います。</p>
+
+      <div class="art">
+        <h3><span class="anum">第1条</span>基本方針</h3>
+        <p>当社は、個人情報が個人の重要な情報であることを認識し、適法かつ公正な手段により取得し、利用目的の範囲内で適切に利用します。</p>
+        <p>また、取得した個人情報について、漏えい、滅失、毀損、不正アクセス等を防止するため、必要かつ適切な安全管理措置を講じます。</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第2条</span>適用範囲</h3>
+        <p>本プライバシーポリシーは、本サイトおよび本サービスに関連して当社が取得する個人情報の取扱いに適用されます。</p>
+        <p>本サイトからリンクされる外部サイトまたは外部サービスにおける個人情報の取扱いについては、当該外部サイトまたは外部サービスの定めるプライバシーポリシー等をご確認ください。</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第3条</span>取得する情報</h3>
+        <p>当社は、以下の情報を取得することがあります。</p>
+        <ol>
+          <li>お問い合わせ時に取得する情報
+            <ul class="dash">
+              <li>氏名</li>
+              <li>会社名、部署名、役職</li>
+              <li>メールアドレス</li>
+              <li>電話番号</li>
+              <li>相談テーマ</li>
+              <li>お問い合わせ内容</li>
+              <li>その他、お問い合わせフォームまたはメール等を通じてご提供いただく情報</li>
+            </ul>
+          </li>
+          <li>商談、契約、業務遂行に伴い取得する情報
+            <ul class="dash">
+              <li>名刺情報</li>
+              <li>連絡先情報</li>
+              <li>契約、請求、支払その他取引に関する情報</li>
+              <li>会議、打ち合わせ、提案、業務遂行に必要な情報</li>
+            </ul>
+          </li>
+          <li>本サイトの利用に伴い自動的に取得する情報
+            <ul class="dash">
+              <li>IPアドレス</li>
+              <li>ブラウザ、端末、OS等の利用環境に関する情報</li>
+              <li>閲覧ページ、閲覧日時、リファラ等のアクセスログ</li>
+              <li>Cookieその他類似技術により取得される情報</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第4条</span>利用目的</h3>
+        <p>当社は、取得した個人情報を以下の目的で利用します。</p>
+        <ol>
+          <li>お問い合わせ、相談、資料請求等への対応のため</li>
+          <li>本サービスに関する連絡、提案、見積、契約、業務遂行、請求、支払その他取引管理のため</li>
+          <li>事業構想、事業開発、PMO、DX/データ活用、業務設計、技術実装支援、プロダクト開発支援等の提供および改善のため</li>
+          <li>当社のサービス、活動、イベント、セミナー、記事、資料等に関する案内のため</li>
+          <li>本サイトの運営、保守、改善、利用状況の分析のため</li>
+          <li>不正行為、迷惑行為、セキュリティ上の問題への対応のため</li>
+          <li>法令、契約、社内規程等に基づく権利の行使または義務の履行のため</li>
+          <li>上記各目的に付随または関連する目的のため</li>
+        </ol>
+        <p>当社は、法令で認められる場合を除き、あらかじめ公表または通知した利用目的の範囲を超えて個人情報を利用しません。</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第5条</span>第三者提供</h3>
+        <p>当社は、次の場合を除き、本人の同意なく個人データを第三者に提供しません。</p>
+        <ol>
+          <li>法令に基づく場合</li>
+          <li>人の生命、身体または財産の保護のために必要があり、本人の同意を得ることが困難である場合</li>
+          <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要があり、本人の同意を得ることが困難である場合</li>
+          <li>国の機関、地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに協力する必要があり、本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがある場合</li>
+          <li>事業の承継に伴って個人データを提供する場合</li>
+          <li>その他法令により認められる場合</li>
+        </ol>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第6条</span>業務委託</h3>
+        <p>当社は、利用目的の達成に必要な範囲で、個人情報の取扱いの全部または一部を外部事業者に委託することがあります。</p>
+        <p>この場合、当社は、委託先に対して必要かつ適切な監督を行います。委託先には、以下の事業者が含まれることがあります。</p>
+        <ul class="dash">
+          <li>サーバー、クラウド、メール、フォーム、ストレージ等のシステム提供事業者</li>
+          <li>ウェブサイト制作、保守、アクセス解析等の支援事業者</li>
+          <li>会計、法務、労務、その他専門業務の支援事業者</li>
+        </ul>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第7条</span>共同利用</h3>
+        <p>当社は、個人情報を特定の第三者と共同利用する場合には、法令に従い、共同利用される個人情報の項目、共同利用者の範囲、共同利用者の利用目的、管理責任者その他必要な事項をあらかじめ公表します。</p>
+        <p>なお、本プライバシーポリシーの制定時点において、本サイトのお問い合わせを通じて取得した個人情報について、特定の第三者との共同利用を予定しているものではありません。</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第8条</span>Cookieおよびアクセス解析ツールの利用</h3>
+        <p>当社は、本サイトの利便性向上、利用状況の把握、改善、セキュリティ確保のため、Cookieその他類似技術を利用することがあります。</p>
+        <p>当社は、本サイトのアクセス解析のため、Google Analytics等の外部サービスを利用することがあります。これらのサービスでは、Cookie等を利用して、個人を直接特定しない形でアクセス情報が収集されることがあります。</p>
+        <p>利用者は、ブラウザの設定によりCookieを無効化することができます。ただし、Cookieを無効化した場合、本サイトの一部機能が利用できない場合があります。</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第9条</span>安全管理措置</h3>
+        <p>当社は、取り扱う個人データの漏えい、滅失、毀損、不正アクセス等を防止するため、以下を含む必要かつ適切な安全管理措置を講じます。</p>
+        <ol>
+          <li>個人情報の取扱いに関する責任者および取扱範囲の明確化</li>
+          <li>個人情報にアクセスできる者の限定およびアクセス権限の管理</li>
+          <li>個人情報を取り扱う端末、アカウント、クラウドサービス等の適切な管理</li>
+          <li>パスワード、二要素認証、通信の暗号化等の技術的安全管理措置</li>
+          <li>個人情報を取り扱う従業者、役員、業務委託先等に対する必要かつ適切な監督</li>
+          <li>外部委託先における個人情報の取扱状況の確認および必要な契約上の措置</li>
+        </ol>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第10条</span>個人情報の開示、訂正、利用停止等</h3>
+        <p>本人は、当社が保有する自己の保有個人データについて、利用目的の通知、開示、訂正、追加、削除、利用停止、消去、第三者提供の停止、第三者提供記録の開示等を求めることができます。</p>
+        <p>当社は、本人からこれらの請求を受けた場合、本人確認を行ったうえで、法令に従い、合理的な期間および範囲で対応します。</p>
+        <p>ただし、法令により当社が対応義務を負わない場合、または本人確認ができない場合には、請求に応じられないことがあります。</p>
+        <p>なお、開示等の請求にあたり、当社が手数料を定める場合には、あらかじめその内容を公表または通知します。</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第11条</span>個人情報の保存期間</h3>
+        <p>当社は、利用目的の達成に必要な範囲で個人情報を保存します。</p>
+        <p>保存期間が経過した場合、または利用目的の達成により不要となった場合には、法令上保存が必要な場合を除き、適切な方法により削除または匿名化その他必要な措置を講じます。</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第12条</span>外国にある第三者への提供等</h3>
+        <p>当社は、外国にある第三者に個人データを提供する必要がある場合、法令に従い、本人の同意取得、情報提供、提供先における相当措置の確認その他必要な対応を行います。</p>
+        <p>また、クラウドサービス、アクセス解析ツール、フォームサービス等の利用により、外国に所在する事業者が個人情報を取り扱う可能性がある場合には、必要に応じて当該外部サービスの安全管理体制、所在国、個人情報保護制度等を確認し、適切な取扱いに努めます。</p>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第13条</span>お問い合わせ窓口</h3>
+        <p>本プライバシーポリシー、当社における個人情報の取扱い、開示等の請求、苦情または相談については、以下の窓口までお問い合わせください。</p>
+        <div class="contact-box">
+          <dl class="crow">
+            <dt>会社名</dt><dd>Particle design 株式会社</dd>
+            <dt>代表者</dt><dd>代表取締役　輪島 智仁</dd>
+            <dt>所在地</dt><dd>東京都港区芝大門1-2-14 H1O浜松町 818</dd>
+            <dt>お問い合わせ先</dt><dd>本サイトのお問い合わせフォームよりご連絡ください</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="art">
+        <h3><span class="anum">第14条</span>本プライバシーポリシーの変更</h3>
+        <p>当社は、法令の改正、事業内容の変更、個人情報の取扱いの変更その他必要に応じて、本プライバシーポリシーを変更することがあります。</p>
+        <p>変更後の内容は、本サイト上に掲載した時点から効力を生じるものとします。ただし、法令上本人の同意が必要となる変更については、法令に従い適切な手続を行います。</p>
+      </div>
+
+      <p class="end">以上</p>
+
+      <div class="back">
+        <a href="Particle design Top.html" class="btn btn-primary">トップへ戻る <span class="ar">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site">
+    <div class="container">
+      <div class="top">
+        <div class="fbrand">
+          <a class="brand" href="Particle design Top.html"><img class="logo" src="assets/logo.png" alt="Particle design"></a>
+          <p>Strategy, Technology, and Execution for New Business Creation. 企業の中に眠る可能性を見つけ、つなぎ、形にする会社です。</p>
+        </div>
+        <div class="fnav">
+          <div class="fcol">
+            <span class="fh">Sitemap</span>
+            <a href="Particle design Top.html#about">About</a>
+            <a href="Particle design Top.html#mission">Mission</a>
+            <a href="Particle design Top.html#services">Services</a>
+            <a href="Particle design Top.html#wwd">What We Do</a>
+          </div>
+          <div class="fcol">
+            <span class="fh">&nbsp;</span>
+            <a href="Particle design Top.html#how">How We Work</a>
+            <a href="Particle design Top.html#news">News</a>
+            <a href="Company.html">Company</a>
+            <a href="Particle design Top.html#contact">Contact</a>
+          </div>
+          <div class="fcol">
+            <span class="fh">Language</span>
+            <a href="Privacy.html">日本語</a>
+            <a href="Privacy EN.html">English</a>
+          </div>
+        </div>
+      </div>
+      <div class="fbottom">
+        <span>© 2026 Particle design Inc.</span>
+        <a href="Privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  (function(){
+    const t=document.getElementById('navToggle'), m=document.getElementById('mnav');
+    if(!t||!m)return;
+    t.addEventListener('click',()=>{t.classList.toggle('open');m.classList.toggle('open');});
+    m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{t.classList.remove('open');m.classList.remove('open');}));
+  })();
+</script>
+</body>
+</html>

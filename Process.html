@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>伴走型プロセス ｜ Particle design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1B2A4A;--ink:#33425C;--soft:#6E7B92;--line:#E6EBF3;--line-2:#D9E1EC;
+    --bg:#FFFFFF;--bg-soft:#F5F8FC;--cyan:#27A7D8;--emerald:#33B98C;--purple:#8E7CDC;
+    --jp:'Zen Kaku Gothic New', sans-serif;--en:'Manrope', sans-serif;--mincho:'Shippori Mincho', serif;
+    --sp:80px;--rad:4px;--maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--jp);color:var(--ink);background:var(--bg);font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased;letter-spacing:.01em;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 40px;}
+
+  .eyebrow{font-family:var(--en);font-weight:700;font-size:12px;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--cyan);border-radius:2px;}
+  .eyebrow .jp{font-family:var(--jp);font-weight:500;color:var(--soft);letter-spacing:.08em;}
+  h2.sec-title{font-family:var(--jp);font-weight:700;font-size:32px;line-height:1.45;color:var(--navy);margin:18px 0 0;letter-spacing:.02em;}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--jp);font-weight:500;font-size:15px;padding:13px 26px;border-radius:var(--rad);border:1.5px solid transparent;cursor:pointer;transition:.2s;}
+  .btn .ar{font-family:var(--en);font-weight:700;transition:transform .2s;}
+  .btn:hover .ar{transform:translateX(3px);}
+  .btn-primary{background:var(--navy);color:#fff;}
+  .btn-primary:hover{background:var(--cyan);}
+  .btn-ghost{background:transparent;color:var(--navy);border-color:var(--line-2);}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+  /* header */
+  header.site{position:sticky;top:0;z-index:50;height:72px;display:flex;align-items:center;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  header.site .container{display:flex;align-items:center;gap:30px;width:100%;}
+  .brand{display:flex;align-items:center;gap:11px;}
+  .brand .logo{height:34px;width:auto;display:block;}
+  .fbrand .logo{height:34px;filter:brightness(0) invert(1);opacity:.92;}
+  nav.main{display:flex;gap:26px;margin-left:8px;}
+  nav.main a{font-size:14px;color:var(--ink);position:relative;padding:4px 0;}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--cyan);transition:width .22s;}
+  nav.main a:hover{color:var(--navy);}
+  nav.main a:hover::after,nav.main a.active::after{width:100%;}
+  nav.main a.active{color:var(--navy);font-weight:700;}
+  .head-right{margin-left:auto;display:flex;align-items:center;gap:18px;}
+  .lang{font-family:var(--en);font-weight:600;font-size:13px;color:var(--soft);display:flex;gap:7px;}
+  .lang b{color:var(--navy);}
+  .lang span{color:var(--line-2);}
+  .lang a:hover{color:var(--cyan);}
+  .nav-toggle{display:none;margin-left:6px;width:42px;height:42px;border:none;background:transparent;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0;}
+  .nav-toggle span{width:22px;height:2px;background:var(--navy);border-radius:2px;transition:.25s;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mnav{display:none;position:fixed;top:72px;left:0;right:0;z-index:49;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;padding:10px 40px 26px;box-shadow:0 22px 44px -24px rgba(27,42,74,.34);transform:translateY(-14px);opacity:0;visibility:hidden;transition:transform .25s ease,opacity .25s ease,visibility .25s;}
+  .mnav.open{transform:translateY(0);opacity:1;visibility:visible;}
+  .mnav a.mlink{font-size:16px;color:var(--ink);padding:15px 2px;border-bottom:1px solid var(--line);}
+  .mnav a.mlink:hover{color:var(--cyan);}
+  .mnav .mfoot{display:flex;align-items:center;gap:16px;margin-top:20px;}
+  .mnav .mfoot .btn-primary{flex:1;justify-content:center;}
+
+  /* page intro band */
+  .page-head{background:var(--navy);color:#fff;padding:74px 0 70px;position:relative;overflow:hidden;}
+  .page-head::before{content:"";position:absolute;inset:0;background:radial-gradient(45% 80% at 88% 12%,rgba(39,167,216,.22),transparent 60%),radial-gradient(45% 80% at 6% 92%,rgba(142,124,220,.20),transparent 60%);}
+  .page-head .container{position:relative;z-index:2;}
+  .page-head .eyebrow{color:#7FD2EE;flex-wrap:wrap;white-space:nowrap;}
+  .page-head .eyebrow::before{background:#7FD2EE;}
+  .page-head .eyebrow .jp{color:#A9B6CE;white-space:nowrap;}
+  .page-head h1{font-family:var(--mincho);font-weight:500;font-size:38px;line-height:1.55;color:#fff;letter-spacing:.05em;margin:20px 0 0;}
+
+  /* strengths layout */
+  .why{padding:var(--sp) 0;background:#fff;}
+  .why .grid{display:grid;grid-template-columns:380px 1fr;gap:64px;align-items:start;}
+  .why .intro{position:sticky;top:104px;}
+  .why .intro .lead{font-size:16px;color:var(--ink);margin:22px 0 0;line-height:1.95;}
+  .why .intro .lead b{color:var(--navy);font-weight:700;}
+  .why .intro .back{margin-top:34px;}
+
+  .scards{display:flex;flex-direction:column;gap:18px;}
+  .scard{border:1px solid var(--line);border-radius:14px;background:#fff;padding:30px 32px;display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:start;transition:.22s;position:relative;overflow:hidden;}
+  .scard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(180deg,var(--cyan),var(--purple));transition:width .25s;}
+  .scard:hover{border-color:var(--line-2);box-shadow:0 18px 44px -22px rgba(27,42,74,.26);transform:translateY(-2px);}
+  .scard:hover::before{width:4px;}
+  .scard .ico{width:64px;height:64px;border-radius:14px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;}
+  .scard .ico img{width:36px;height:36px;}
+  .scard .no{font-family:var(--en);font-weight:800;font-size:12px;letter-spacing:.14em;color:var(--cyan);}
+  .scard h3{font-family:var(--jp);font-weight:700;font-size:20px;color:var(--navy);margin:5px 0 12px;letter-spacing:.02em;line-height:1.5;}
+  .scard p{font-size:14.5px;color:var(--soft);margin:0;line-height:1.9;}
+
+  /* closing CTA */
+  .why-cta{background:var(--bg-soft);border-top:1px solid var(--line);padding:64px 0;text-align:center;}
+  .why-cta h2{font-family:var(--jp);font-weight:700;font-size:24px;color:var(--navy);margin:0 0 8px;letter-spacing:.02em;}
+  .why-cta p{font-size:15px;color:var(--soft);margin:0 0 28px;}
+  .why-cta .row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+  /* ===== intro ===== */
+  .intro-band{padding:60px 0 4px;background:#fff;}
+  .intro-band .lead{max-width:780px;font-size:16.5px;color:var(--ink);line-height:2.05;margin:18px 0 0;}
+  .intro-band .lead b{color:var(--navy);font-weight:700;}
+
+  /* ===== process steps ===== */
+  .pstep{padding:74px 0;border-top:1px solid var(--line);}
+  .pstep.alt{background:var(--bg-soft);}
+  .phead{display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center;}
+  .phead.rev .phead-text{order:2;}
+  .phead .eyebrow .num{font-family:var(--en);font-weight:800;}
+  .phead h2.ph{font-family:var(--jp);font-weight:700;font-size:27px;color:var(--navy);margin:14px 0 18px;line-height:1.5;letter-spacing:.02em;}
+  .phead .phead-text p{font-size:15px;color:var(--ink);line-height:2.05;margin:0;}
+  .phead .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+  .phead .chips span{font-size:12.5px;color:var(--navy);background:#fff;border:1px solid var(--line-2);border-radius:20px;padding:5px 13px;}
+  .pstep.alt .phead .chips span{background:var(--bg-soft);}
+  .phead-img{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 22px 50px -30px rgba(27,42,74,.3);}
+  .phead-img img{width:100%;display:block;}
+
+  /* slideshow */
+  .pslider{margin-top:54px;display:flex;flex-direction:column;align-items:center;}
+  .pview{position:relative;width:100%;max-width:404px;aspect-ratio:398/646;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 26px 56px -30px rgba(27,42,74,.34);}
+  .pslide{position:absolute;inset:0;opacity:0;transition:opacity .55s ease;display:flex;align-items:center;justify-content:center;}
+  .pslide.on{opacity:1;}
+  .pslide img{width:100%;height:100%;object-fit:contain;}
+  .parrow{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.92);color:var(--navy);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;transition:.2s;box-shadow:0 6px 16px -8px rgba(27,42,74,.4);font-family:var(--en);}
+  .parrow:hover{background:var(--cyan);color:#fff;border-color:var(--cyan);}
+  .parrow.prev{left:-21px;}
+  .parrow.next{right:-21px;}
+  .pcap{margin-top:20px;text-align:center;display:flex;align-items:center;gap:9px;justify-content:center;}
+  .pcap .step-i{font-family:var(--en);font-weight:800;color:var(--cyan);font-size:13px;letter-spacing:.1em;}
+  .pcap .step-t{font-weight:700;color:var(--navy);font-size:15.5px;letter-spacing:.02em;}
+  .pdots{display:flex;gap:8px;justify-content:center;margin-top:15px;}
+  .pdots button{width:8px;height:8px;border-radius:50%;border:none;background:var(--line-2);cursor:pointer;padding:0;transition:.3s;}
+  .pdots button.on{background:var(--cyan);width:24px;border-radius:4px;}
+
+  /* ===== values ===== */
+  .values{padding:var(--sp) 0;background:#fff;border-top:1px solid var(--line);}
+  .values .vhead{text-align:center;max-width:680px;margin:0 auto;}
+  .values .vhead .eyebrow{justify-content:center;}
+  .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;}
+  .vcard{border:1px solid var(--line);border-radius:16px;background:#fff;padding:32px 28px;position:relative;overflow:hidden;transition:.22s;}
+  .vcard::before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));opacity:.0;transition:.25s;}
+  .vcard:hover{border-color:var(--line-2);box-shadow:0 20px 46px -24px rgba(27,42,74,.26);transform:translateY(-3px);}
+  .vcard:hover::before{opacity:1;}
+  .vcard .vn{font-family:var(--en);font-weight:800;font-size:13px;letter-spacing:.12em;color:var(--cyan);}
+  .vcard h3{font-family:var(--jp);font-weight:700;font-size:18px;color:var(--navy);margin:12px 0 12px;line-height:1.55;letter-spacing:.02em;}
+  .vcard p{font-size:14px;color:var(--soft);margin:0;line-height:1.95;}
+
+  @media(prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);}
+    .reveal.in{opacity:1;transform:none;}
+  }
+
+  /* footer */
+  footer.site{background:#13203A;color:#A9B6CE;padding:64px 0 28px;}
+  footer.site .top{display:flex;justify-content:space-between;gap:50px;flex-wrap:wrap;}
+  footer.site .fbrand{max-width:340px;}
+  footer.site .fbrand p{font-size:13.5px;color:#8593AE;margin:18px 0 0;line-height:1.85;}
+  .fnav{display:flex;gap:64px;flex-wrap:wrap;}
+  .fcol{display:flex;flex-direction:column;gap:12px;}
+  .fcol .fh{font-family:var(--en);font-weight:700;font-size:11px;letter-spacing:.16em;color:#5F6E8C;text-transform:uppercase;margin-bottom:4px;}
+  .fcol a{font-size:14px;color:#A9B6CE;transition:.2s;}
+  .fcol a:hover{color:#7FD2EE;}
+  .fbottom{margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:#5F6E8C;font-family:var(--en);}
+
+  @media(max-width:980px){
+    nav.main,.head-right .lang,.head-right .btn-primary{display:none;}
+    .nav-toggle{display:flex;}
+    .mnav{display:flex;}
+    .why .grid{grid-template-columns:1fr;gap:40px;}
+    .why .intro{position:static;}
+    .phead{grid-template-columns:1fr;gap:30px;}
+    .phead.rev .phead-text{order:0;}
+    .vgrid{grid-template-columns:1fr;gap:18px;}
+  }
+  @media(max-width:620px){
+    :root{--sp:56px;}
+    .container{padding:0 22px;}
+    .page-head h1{font-size:28px;line-height:1.6;}
+    h2.sec-title{font-size:26px;}
+    .mnav{padding:10px 22px 24px;}
+    .scard{grid-template-columns:1fr;gap:16px;padding:26px 24px;}
+    .scard .ico{width:54px;height:54px;}
+    .phead h2.ph{font-size:23px;}
+    .pview{max-width:330px;}
+    .parrow.prev{left:-12px;}
+    .parrow.next{right:-12px;}
+    footer.site .top{gap:32px;}
+    .fnav{gap:36px;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site">
+    <div class="container">
+      <a class="brand" href="Particle design Top.html">
+        <img class="logo" src="assets/logo.png" alt="Particle design">
+      </a>
+      <nav class="main">
+        <a href="Particle design Top.html#about">About</a>
+        <a href="Particle design Top.html#mission">Mission</a>
+        <a href="Particle design Top.html#services">Services</a>
+        <a href="Particle design Top.html#wwd">What We Do</a>
+        <a href="Particle design Top.html#how" class="active">How We Work</a>
+        <a href="Particle design Top.html#news">News</a>
+        <a href="Company.html">Company</a>
+      </nav>
+      <div class="head-right">
+        <div class="lang"><b>JP</b><span>/</span><a href="Process EN.html">EN</a></div>
+        <a href="Particle design Top.html#contact" class="btn btn-primary">Contact <span class="ar">→</span></a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mnav" id="mnav">
+      <a class="mlink" href="Particle design Top.html#about">About <span style="color:var(--soft);font-size:13px">／ 企業理念</span></a>
+      <a class="mlink" href="Particle design Top.html#mission">Mission <span style="color:var(--soft);font-size:13px">／ 課題提起</span></a>
+      <a class="mlink" href="Particle design Top.html#services">Services <span style="color:var(--soft);font-size:13px">／ 提供機能</span></a>
+      <a class="mlink" href="Strengths.html">Why us <span style="color:var(--soft);font-size:13px">／ 強み</span></a>
+      <a class="mlink" href="Particle design Top.html#wwd">What We Do <span style="color:var(--soft);font-size:13px">／ 提供価値</span></a>
+      <a class="mlink" href="Particle design Top.html#how">How We Work <span style="color:var(--soft);font-size:13px">／ 伴走支援</span></a>
+      <a class="mlink" href="Particle design Top.html#news">News <span style="color:var(--soft);font-size:13px">／ お知らせ</span></a>
+      <a class="mlink" href="Company.html">Company <span style="color:var(--soft);font-size:13px">／ 会社概要</span></a>
+      <div class="mfoot">
+        <a href="Particle design Top.html#contact" class="btn btn-primary">Contact <span class="ar">→</span></a>
+        <div class="lang"><b>JP</b><span>/</span><a href="Process EN.html">EN</a></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== PAGE HEAD ===================== -->
+  <section class="page-head">
+    <div class="container">
+      <span class="eyebrow">How We Work <span class="jp">／ 伴走型プロセス</span></span>
+      <h1>構想から実装まで、<br>チームの内側で伴走する。</h1>
+    </div>
+  </section>
+
+  <!-- ===================== INTRO ===================== -->
+  <section class="intro-band">
+    <div class="container">
+      <span class="eyebrow">Partnership Process <span class="jp">／ 進め方</span></span>
+      <p class="lead">Particle design は、<b>構想から実装、そして運用の定着まで</b>を、チームの内側で伴走します。曖昧なアイデアを言語化し、現場で動く仕組みへ。次の5つの進め方で、組織が確実に「次の判断」を下せる状態をつくります。</p>
+    </div>
+  </section>
+
+  <!-- ===================== STEP 01 ===================== -->
+  <section class="pstep">
+    <div class="container">
+      <div class="phead reveal">
+        <div class="phead-text">
+          <span class="eyebrow"><span class="num">Step 01</span> <span class="jp">／ Strategy</span></span>
+          <h2 class="ph">事業モデルと戦略の設計</h2>
+          <p>経営者の頭の中にある曖昧なアイデアや成長構想を言語化します。誰のどんな課題を解決するのかという提供価値や、収益モデル、検証の順序、中長期的なロードマップを明確にし、組織として「投資判断ができる状態」へと引き上げます。</p>
+        </div>
+        <div class="phead-img"><img src="assets/process/s1-ov.png" loading="lazy" decoding="async" alt="事業モデルと戦略の設計"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STEP 02 ===================== -->
+  <section class="pstep alt">
+    <div class="container">
+      <div class="phead rev reveal">
+        <div class="phead-text">
+          <span class="eyebrow"><span class="num">Step 02</span> <span class="jp">／ Workflow</span></span>
+          <h2 class="ph">リアルな業務フローの分解と再構築</h2>
+          <p>現場での実際の人の動き、モノの流れ、既存の業務プロセスを可視化して細かく分解します。紙やExcel、属人的な作業に依存している部分を洗い出し、システム開発を進めるための「実装可能な要件」へと落とし込みます。</p>
+        </div>
+        <div class="phead-img"><img src="assets/process/s2-ov.png" loading="lazy" decoding="async" alt="業務フローの分解と再構築"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STEP 03 ===================== -->
+  <section class="pstep">
+    <div class="container">
+      <div class="phead reveal">
+        <div class="phead-text">
+          <span class="eyebrow"><span class="num">Step 03</span> <span class="jp">／ Data</span></span>
+          <h2 class="ph">意思決定に使えるデータの整備</h2>
+          <p>現場に眠っている情報を整理し、新たに取得すべきデータ、構造化すべき情報、ダッシュボード等で可視化すべき指標を定義します。単にデータを集めるだけでなく、経営や現場が「次のアクションを判断するための基盤」やAI活用につなげます。</p>
+        </div>
+        <div class="phead-img"><img src="assets/process/s3-ov.png" loading="lazy" decoding="async" alt="意思決定に使えるデータの整備"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STEP 04 ===================== -->
+  <section class="pstep alt">
+    <div class="container">
+      <div class="phead rev reveal">
+        <div class="phead-text">
+          <span class="eyebrow"><span class="num">Step 04</span> <span class="jp">／ Technology</span></span>
+          <h2 class="ph">テクノロジーの事業価値への接続</h2>
+          <p>RFID、NFC、QRコード、クラウド、専用アプリといった技術を、「とりあえず導入して終わる」状態にはしません。それらの技術が、実際の顧客体験の向上や業務効率化といった事業価値に直結し、現場に運用が定着するよう支援します。</p>
+          <div class="chips"><span>RFID</span><span>NFC</span><span>QRコード</span><span>クラウド</span><span>専用アプリ</span><span>AI活用</span></div>
+        </div>
+        <div class="phead-img"><img src="assets/process/s4-ov.png" loading="lazy" decoding="async" alt="テクノロジーの事業価値への接続"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== STEP 05 ===================== -->
+  <section class="pstep">
+    <div class="container">
+      <div class="phead reveal">
+        <div class="phead-text">
+          <span class="eyebrow"><span class="num">Step 05</span> <span class="jp">／ PMO</span></span>
+          <h2 class="ph">経営と現場をつなぐプロジェクト推進</h2>
+          <p>構想側（経営陣）と実装側（現場や開発チーム）の間に立ち、両者の言語を翻訳する司令塔を担います。部門横断での調整、会議体の設計、PoC（概念実証）の計画、次フェーズへ進むための要件整理などを通じ、プロジェクトが途中で頓挫しないよう推進します。</p>
+        </div>
+        <div class="phead-img"><img src="assets/process/s5-ov.png" loading="lazy" decoding="async" alt="経営と現場をつなぐプロジェクト推進"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VALUES ===================== -->
+  <section class="values">
+    <div class="container">
+      <div class="vhead reveal">
+        <span class="eyebrow">Our Stance <span class="jp">／ 大切にしていること</span></span>
+        <h2 class="sec-title">お客様と向き合う上で<br>大切にしていること</h2>
+      </div>
+      <div class="vgrid">
+        <div class="vcard reveal">
+          <div class="vn">VALUE 01</div>
+          <h3>「共創型」の立ち位置</h3>
+          <p>外部の評論家としてではなく、クライアントのチームの一員として、課題整理から推進、実装、次の意思決定まで伴走する姿勢を大切にしています。</p>
+        </div>
+        <div class="vcard reveal">
+          <div class="vn">VALUE 02</div>
+          <h3>「次の判断ができる状態」をつくる</h3>
+          <p>「事業を必ず成功させる」といった過剰な約束はしません。その代わり、「何を検証すべきか」「どの順番で進めるか」「どこにリスクがあるか」を明確にし、経営者や組織が確実に次の判断を下せる状態をつくることを約束しています。</p>
+        </div>
+        <div class="vcard reveal">
+          <div class="vn">VALUE 03</div>
+          <h3>「まだ構想段階」から寄り添う</h3>
+          <p>要件が固まりきっていない曖昧な状態からでも相談を受け入れ、初回の対話を通じて論点を整理し、一緒に進め方を考えていくことを重視しています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CLOSING CTA ===================== -->
+  <section class="why-cta">
+    <div class="container">
+      <h2>まだ構想段階でも、ご相談ください。</h2>
+      <p>要件が固まっていない段階から、論点を整理し、進め方を一緒に考えます。</p>
+      <div class="row">
+        <a href="Particle design Top.html#contact" class="btn btn-primary">事業相談をする <span class="ar">→</span></a>
+        <a href="Particle design Top.html#how" class="btn btn-ghost">プロセスの概要を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site">
+    <div class="container">
+      <div class="top">
+        <div class="fbrand">
+          <a class="brand" href="Particle design Top.html"><img class="logo" src="assets/logo.png" alt="Particle design"></a>
+          <p>Strategy, Technology, and Execution for New Business Creation. 企業の中に眠る可能性を見つけ、つなぎ、形にする会社です。</p>
+        </div>
+        <div class="fnav">
+          <div class="fcol">
+            <span class="fh">Sitemap</span>
+            <a href="Particle design Top.html#about">About</a>
+            <a href="Particle design Top.html#mission">Mission</a>
+            <a href="Particle design Top.html#services">Services</a>
+            <a href="Strengths.html">Why us</a>
+          </div>
+          <div class="fcol">
+            <span class="fh">&nbsp;</span>
+            <a href="Particle design Top.html#wwd">What We Do</a>
+            <a href="Particle design Top.html#how" class="active">How We Work</a>
+            <a href="Particle design Top.html#news">News</a>
+            <a href="Company.html">Company</a>
+          </div>
+          <div class="fcol">
+            <span class="fh">Language</span>
+            <a href="Process.html">日本語</a>
+            <a href="Process EN.html">English</a>
+          </div>
+        </div>
+      </div>
+      <div class="fbottom">
+        <span>© 2026 Particle design Inc.</span>
+        <a href="Privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  (function(){
+    const t=document.getElementById('navToggle'), m=document.getElementById('mnav');
+    if(!t||!m)return;
+    t.addEventListener('click',()=>{t.classList.toggle('open');m.classList.toggle('open');});
+    m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{t.classList.remove('open');m.classList.remove('open');}));
+  })();
+
+  /* ===== scroll reveal ===== */
+  (function(){
+    const els=[...document.querySelectorAll('.reveal')];
+    if(!els.length)return;
+    const io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{threshold:.16});
+    els.forEach(function(el){ io.observe(el); });
+  })();
+
+  /* ===== process slideshows (lightweight) ===== */
+  (function(){
+    document.querySelectorAll('.pslider').forEach(function(sl){
+      const slides=[...sl.querySelectorAll('.pslide')];
+      if(slides.length<2)return;
+      const dotsWrap=sl.querySelector('.pdots');
+      const cap=sl.querySelector('.pcap');
+      const capI=cap&&cap.querySelector('.step-i'), capT=cap&&cap.querySelector('.step-t');
+      const interval=parseInt(sl.dataset.interval,10)||4000;
+      let i=0, timer=null, visible=false;
+      const dots=slides.map(function(_,k){ const b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','slide '+(k+1));
+        b.addEventListener('click',function(){ go(k); restart(); }); dotsWrap.appendChild(b); return b; });
+      function render(){
+        slides.forEach(function(s,k){ s.classList.toggle('on',k===i); });
+        dots.forEach(function(d,k){ d.classList.toggle('on',k===i); });
+        if(capI) capI.textContent='0'+(i+1);
+        if(capT) capT.textContent=slides[i].dataset.label||'';
+      }
+      function go(n){ i=(n+slides.length)%slides.length; render(); }
+      function next(){ go(i+1); }
+      function start(){ if(!timer && visible) timer=setInterval(next,interval); }
+      function stop(){ clearInterval(timer); timer=null; }
+      function restart(){ stop(); start(); }
+      sl.querySelectorAll('[data-nav]').forEach(function(btn){ btn.addEventListener('click',function(){ go(i+(btn.dataset.nav==='next'?1:-1)); restart(); }); });
+      const pv=sl.querySelector('.pview');
+      pv.addEventListener('mouseenter',stop);
+      pv.addEventListener('mouseleave',start);
+      render();
+      const io=new IntersectionObserver(function(es){ es.forEach(function(e){ visible=e.isIntersecting; if(visible) start(); else stop(); }); },{threshold:.25});
+      io.observe(sl);
+    });
+  })();
+</script>
+</body>
+</html>
