@@ -1,1 +1,16 @@
+# OS / editor cruft
 .DS_Store
+**/.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Editor / tooling
+.vscode/
+.idea/
+
+# Claude Code local preview config (not part of the site)
+.claude/launch.json
+
+# Note: uploads/ and scraps/ hold source material (PDFs, sketches) and are
+# NOT part of the published site. Exclude them from deploys at the host level.

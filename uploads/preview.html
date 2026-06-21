@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particle design株式会社 | ビジネスをデザインし、社会実装する事業共創スタジオ</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind Configuration to match the Next.js setup -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '"Noto Sans JP"', 'sans-serif'],
+          },
+          colors: {
+            foreground: '#111111',
+            background: '#ffffff',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Base Styles -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      color: #111111;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased bg-white text-[#111]">
+
+  <!-- ParticleStage Placeholder (Empty fixed layer at z-0) -->
+  <div class="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
+    <canvas id="particle-canvas" class="block w-full h-full opacity-70 transition-opacity duration-1000"></canvas>
+  </div>
+
+  <!-- 1. Header -->
+  <header class="relative z-10 fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="font-medium tracking-wide text-sm">Particle design</div>
+      <nav class="hidden md:flex items-center gap-8 text-sm">
+        <a href="#services" class="hover:text-gray-500 transition-colors">Services</a>
+        <a href="#approach" class="hover:text-gray-500 transition-colors">Approach</a>
+        <a href="#founder" class="hover:text-gray-500 transition-colors">Founder</a>
+        <a href="#contact" class="border border-gray-200 px-4 py-2 hover:bg-gray-50 transition-colors">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-16">
+    <!-- 2. Hero -->
+    <section data-scene="hero" class="min-h-[90vh] flex flex-col justify-center px-6 max-w-6xl mx-auto">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-light leading-tight tracking-tight mb-8">
+        <span class="block">粒子レベルで、ビジネスをデザインする。</span>
+        <span class="block mt-2">構想を、社会実装できる事業へ。</span>
+      </h1>
+      <p class="text-gray-500 max-w-2xl text-lg leading-relaxed font-light mb-12">
+        Particle design株式会社は、構想を事業・業務・データ・技術へ翻訳し、
+        社会実装できる形に変換する事業共創スタジオです。
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="#contact" class="inline-block bg-[#111] text-white px-8 py-4 text-sm tracking-wider hover:bg-gray-800 transition-colors text-center">
+          相談する
+        </a>
+        <a href="#services" class="inline-block border border-gray-200 bg-white text-[#111] px-8 py-4 text-sm tracking-wider hover:bg-gray-50 transition-colors text-center">
+          支援領域を見る
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. Intro / Philosophy -->
+    <section id="philosophy" data-scene="intro" class="py-32 px-6 border-t border-gray-100 max-w-6xl mx-auto">
+      <div class="max-w-3xl">
+        <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-8">Philosophy</h2>
+        <p class="text-2xl leading-loose font-light">
+          アイデアを現実に変えるためには、抽象的な「構想」を具体的な「構造」へと変換する必要があります。
+          私たちは、コンセプト、ビジネス、オペレーション、データ、テクノロジーという異なるレイヤーを接続し、
+          ひとつの連続した体験として社会に実装します。
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. Problem -->
+    <section id="problem" data-scene="problem" class="py-32 px-6 border-t border-gray-100 max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-16">
+        <div>
+          <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-8">Problem</h2>
+          <h3 class="text-3xl font-light leading-tight mb-6">
+            戦略と実装の間にある、<br>
+            見えにくい断絶。
+          </h3>
+        </div>
+        <div>
+          <p class="text-gray-600 leading-relaxed">
+            多くの優れたアイデアや戦略が、実行のフェーズで頓挫してしまうのはなぜでしょうか。
+            それは、構想を事業構造に落とし込み、現場のオペレーションに組み込み、
+            データとシステムで裏付ける「翻訳」のプロセスが欠落しているからです。
+            戦略を描く者と、システムを作る者が分断されている限り、
+            真の社会実装は実現しません。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. What We Do -->
+    <section id="what-we-do" data-scene="what-we-do" class="py-32 px-6 border-t border-gray-100 max-w-6xl mx-auto">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-8">What We Do</h2>
+        <h3 class="text-3xl font-light leading-tight mb-8">
+          事業共創スタジオとして、<br>
+          アイデアを実行可能な構造へ翻訳する。
+        </h3>
+        <p class="text-gray-600 leading-relaxed text-left md:text-center">
+          私たちは単なるコンサルティングファームでも、システム開発会社でもありません。
+          お客様の事業構想に深く入り込み、ビジネスアーキテクチャの設計から、
+          現場が動くための仕組みづくり、そしてテクノロジーによる実装までを
+          一気通貫で伴走するパートナーです。
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. Service Areas -->
+    <section id="services" data-scene="service" class="py-32 px-6 border-t border-gray-100 max-w-6xl mx-auto">
+      <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-16 text-center">Service Areas</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors">
+          <div class="text-sm text-gray-400 mb-4 tracking-wider">01</div>
+          <h4 class="text-lg font-medium mb-3">Business Architecture</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">事業の核となる価値定義から、マネタイズモデル、エコシステムの設計まで、ビジネスの骨格を構築します。</p>
+        </div>
+        <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors">
+          <div class="text-sm text-gray-400 mb-4 tracking-wider">02</div>
+          <h4 class="text-lg font-medium mb-3">Strategic PMO</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">複雑なプロジェクトを俯瞰し、経営層と現場、ビジネスとITの結節点として推進力を生み出します。</p>
+        </div>
+        <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors">
+          <div class="text-sm text-gray-400 mb-4 tracking-wider">03</div>
+          <h4 class="text-lg font-medium mb-3">Real World OS Design</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">絵に描いた餅にならないよう、現場のオペレーションや業務フローを現実的かつスケーラブルに設計します。</p>
+        </div>
+        <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors">
+          <div class="text-sm text-gray-400 mb-4 tracking-wider">04</div>
+          <h4 class="text-lg font-medium mb-3">Data Implementation</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">意思決定を支えるデータ基盤の要件定義から、KPIツリーの構築、データ活用プロセスの定着を支援します。</p>
+        </div>
+        <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors">
+          <div class="text-sm text-gray-400 mb-4 tracking-wider">05</div>
+          <h4 class="text-lg font-medium mb-3">Product / Technology Support</h4>
+          <p class="text-gray-500 text-sm leading-relaxed">プロトタイプから本番システムまで、ビジネス要件に最適な技術選定と実装をリードします。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Approach -->
+    <section id="approach" data-scene="approach" class="py-32 px-6 border-t border-gray-100 max-w-6xl mx-auto">
+      <div class="grid lg:grid-cols-3 gap-16">
+        <div class="lg:col-span-1">
+          <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-8">Approach</h2>
+          <h3 class="text-3xl font-light leading-tight">
+            解像度を上げ、<br>
+            確実な一歩を踏み出す。
+          </h3>
+        </div>
+        <div class="lg:col-span-2">
+          <div class="space-y-12">
+            <div class="border-b border-gray-100 pb-6">
+              <h4 class="text-lg font-medium mb-2">01. Discover</h4>
+              <p class="text-gray-600 leading-relaxed text-sm">本質的な課題は何か。事業が提供すべき真の価値は何か。徹底的な対話とリサーチを通じて、プロジェクトの羅針盤を定義します。</p>
+            </div>
+            <div class="border-b border-gray-100 pb-6">
+              <h4 class="text-lg font-medium mb-2">02. Design</h4>
+              <p class="text-gray-600 leading-relaxed text-sm">ビジネスモデル、業務フロー、システム要件の各レイヤーを往復しながら、実行可能で拡張性のあるアーキテクチャを設計します。</p>
+            </div>
+            <div class="border-b border-gray-100 pb-6">
+              <h4 class="text-lg font-medium mb-2">03. Implement</h4>
+              <p class="text-gray-600 leading-relaxed text-sm">机上の空論で終わらせず、アジャイルにプロトタイピングと検証を繰り返し、確かな形へと実装していきます。</p>
+            </div>
+            <div class="border-b border-gray-100 pb-6">
+              <h4 class="text-lg font-medium mb-2">04. Operate & Scale</h4>
+              <p class="text-gray-600 leading-relaxed text-sm">ローンチは始まりに過ぎません。現場での運用定着、データに基づく改善、そして事業のスケールに向けた支援を継続します。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Founder’s Track Record -->
+    <section id="track-record" data-scene="track-record" class="py-32 px-6 border-t border-gray-100 max-w-6xl mx-auto">
+      <div class="max-w-3xl">
+        <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-8">Founder’s Track Record</h2>
+        <h3 class="text-2xl font-light leading-loose mb-12">
+          実装の来歴<br>
+          代表・輪島智仁の実践の積み重ねが、私たちの信頼の土台です。
+        </h3>
+        <p class="text-gray-600 leading-relaxed">
+          Particle design株式会社は設立間もない企業ですが、代表の輪島智仁はこれまで、
+          数々の新規事業創出、全社横断プロジェクトのPMO、ゼロからの組織立ち上げを
+          当事者として牽引してきました。戦略を描くだけではなく、自ら手を動かし、
+          関係者を巻き込んでプロジェクトを前進させる。
+          その実践の歴史が、私たちが事業共創パートナーとして選ばれる理由です。
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. Proof of Execution -->
+    <section id="proof" data-scene="proof" class="py-32 px-6 border-t border-gray-100 bg-gray-50/50">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-16 text-center">Proof of Execution</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors flex items-center justify-center text-center min-h-[160px]">
+            <h4 class="text-lg font-medium">構想を事業構造に変える</h4>
+          </div>
+          <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors flex items-center justify-center text-center min-h-[160px]">
+            <h4 class="text-lg font-medium">部門横断のプロジェクトを前に進める</h4>
+          </div>
+          <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors flex items-center justify-center text-center min-h-[160px]">
+            <h4 class="text-lg font-medium">業務とテクノロジーを接続する</h4>
+          </div>
+          <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors flex items-center justify-center text-center min-h-[160px]">
+            <h4 class="text-lg font-medium">実装後の運用まで見据える</h4>
+          </div>
+          <div class="p-8 border border-gray-100 bg-white hover:border-gray-300 transition-colors flex items-center justify-center text-center min-h-[160px]">
+            <h4 class="text-lg font-medium">事業会社側と開発側の間に立つ</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Future Eggs -->
+    <section id="future-eggs" data-scene="future-eggs" class="py-32 px-6 border-t border-gray-100 max-w-6xl mx-auto">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-8">Future Possibilities</h2>
+        <h3 class="text-3xl font-light leading-tight mb-8">
+          まだ見ぬ可能性の卵を、<br>
+          ともに孵化させる。
+        </h3>
+        <p class="text-gray-600 leading-relaxed">
+          企業の中、地域の中、産業の中には、まだ形になっていない「可能性の卵」が数多く眠っています。
+          私たちは、その微かな熱を見逃さず、ビジネスの構造を与え、テクノロジーの息吹を吹き込み、
+          新しい価値として社会に実装していく存在でありたいと考えています。
+        </p>
+      </div>
+    </section>
+
+    <!-- 11. Founder -->
+    <section id="founder" data-scene="founder" class="py-32 px-6 border-t border-gray-100 max-w-6xl mx-auto">
+      <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-16">Founder</h2>
+      <div class="max-w-2xl">
+        <h3 class="text-2xl font-medium mb-2">輪島 智仁</h3>
+        <p class="text-gray-400 text-sm mb-8 tracking-wider">Tomohito Wajima</p>
+        <p class="text-gray-600 leading-relaxed mb-6">
+          ビジネスアーキテクト / ストラテジックPMO。<br>
+          これまでに多数の新規事業立ち上げ、事業開発、プロジェクトマネジメントを経験。
+          構想レイヤーと実装レイヤーの架け橋となり、クライアントのビジョンを現実の事業へと変換する
+          伴走型パートナーとして活動。
+        </p>
+        <p class="text-gray-600 leading-relaxed">
+          「構想を、社会実装できる事業へ。」を掲げ、Particle design株式会社を設立。
+        </p>
+      </div>
+    </section>
+
+    <!-- 12. Company -->
+    <section id="company" data-scene="company" class="py-32 px-6 border-t border-gray-100 max-w-6xl mx-auto">
+      <h2 class="text-xs uppercase tracking-widest text-gray-400 mb-16">Company</h2>
+      <div class="max-w-3xl border-t border-gray-100">
+        <dl class="divide-y divide-gray-100">
+          <div class="py-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <dt class="text-sm text-gray-500">会社名</dt>
+            <dd class="md:col-span-2 text-sm">Particle design株式会社（Particle design Inc.）</dd>
+          </div>
+          <div class="py-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <dt class="text-sm text-gray-500">代表者</dt>
+            <dd class="md:col-span-2 text-sm">代表取締役 輪島 智仁</dd>
+          </div>
+          <div class="py-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <dt class="text-sm text-gray-500">事業内容</dt>
+            <dd class="md:col-span-2 text-sm leading-relaxed">
+              ・新規事業開発支援、ビジネスアーキテクチャ設計<br>
+              ・ストラテジックPMO、プロジェクトマネジメント支援<br>
+              ・業務フロー設計、データ利活用支援<br>
+              ・ITシステム・プロダクトの要件定義および実装支援
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 13. Contact CTA -->
+    <section id="contact" data-scene="contact" class="py-32 px-6 bg-gray-50 border-t border-gray-100">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl font-light mb-6">ビジネスのデザインについて、<br>お話ししませんか。</h2>
+        <p class="text-gray-500 mb-12 text-sm leading-relaxed">
+          新規事業の構想、プロジェクトの推進、業務やシステムに関する課題など、
+          まずはお気軽にご相談ください。
+        </p>
+        <!-- TODO: 仮の連絡先 -->
+        <a href="mailto:info@example.com" class="inline-block bg-[#111] text-white px-8 py-4 text-sm tracking-wider hover:bg-gray-800 transition-colors">
+          お問い合わせはこちら
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- 14. Footer -->
+  <footer class="relative z-10 py-12 px-6 border-t border-gray-100 bg-white">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="font-medium tracking-wide text-sm">Particle design</div>
+      <div class="text-xs text-gray-400">
+        &copy; 2026 Particle design Inc. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let currentScene = "hero";
+      const sections = document.querySelectorAll("section[data-scene]");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              currentScene = entry.target.getAttribute("data-scene") || "hero";
+              updateParticleTargets();
+            }
+          });
+        },
+        { rootMargin: "-40% 0px -40% 0px", threshold: 0 }
+      );
+      sections.forEach(sec => observer.observe(sec));
+
+      const canvas = document.getElementById("particle-canvas");
+      const ctx = canvas.getContext("2d");
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const baseCount = width < 768 ? 30 : 60;
+      const particleCount = prefersReducedMotion ? Math.floor(baseCount * 0.3) : baseCount;
+
+      const particles = Array.from({ length: particleCount }).map((_, i) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        targetX: null,
+        targetY: null,
+        radius: Math.random() * 1.5 + 0.5,
+        group: i,
+      }));
+
+      window.addEventListener("resize", () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        updateParticleTargets();
+      });
+
+      function updateParticleTargets() {
+        if (currentScene === "founder" || currentScene === "company") {
+          canvas.style.opacity = "0.2";
+        } else {
+          canvas.style.opacity = "0.6";
+        }
+
+        particles.forEach((p, i) => {
+          switch (currentScene) {
+            case "hero":
+              p.targetX = width / 2 + (Math.random() - 0.5) * width * 0.8;
+              p.targetY = height / 2 + (Math.random() - 0.5) * height * 0.8;
+              break;
+            case "intro":
+              const groupIntro = p.group % 3;
+              p.targetX = width * (0.25 + groupIntro * 0.25) + (Math.random() - 0.5) * 100;
+              p.targetY = height / 2 + (Math.random() - 0.5) * 100;
+              break;
+            case "problem":
+            case "founder":
+            case "company":
+              p.targetX = null;
+              p.targetY = null;
+              break;
+            case "what-we-do":
+              const cols = Math.ceil(Math.sqrt(particles.length));
+              const col = i % cols;
+              const row = Math.floor(i / cols);
+              const spacingX = width / cols;
+              const spacingY = height / Math.ceil(particles.length / cols);
+              p.targetX = spacingX * col + spacingX / 2;
+              p.targetY = spacingY * row + spacingY / 2;
+              break;
+            case "service":
+              const groupService = p.group % 5;
+              p.targetX = width * (0.1 + groupService * 0.2) + (Math.random() - 0.5) * 50;
+              p.targetY = height / 2 + (Math.random() - 0.5) * 150;
+              break;
+            case "approach":
+              const progress = i / particles.length;
+              p.targetX = width * 0.1 + progress * width * 0.8;
+              p.targetY = height / 2 + Math.sin(progress * Math.PI * 2) * 100;
+              break;
+            case "track-record":
+              p.targetX = width / 2 + (Math.random() - 0.5) * 50;
+              p.targetY = height * 0.1 + (i / particles.length) * height * 0.8;
+              break;
+            case "proof":
+              const angle = (i / particles.length) * Math.PI * 2;
+              const r = 150;
+              p.targetX = width / 2 + Math.cos(angle) * r;
+              p.targetY = height / 2 + Math.sin(angle) * r;
+              break;
+            case "future-eggs":
+              const eggGroup = p.group % 4;
+              const eggX = width * (0.2 + (eggGroup % 2) * 0.6);
+              const eggY = height * (0.3 + Math.floor(eggGroup / 2) * 0.4);
+              p.targetX = eggX + (Math.random() - 0.5) * 40;
+              p.targetY = eggY + (Math.random() - 0.5) * 40;
+              break;
+            case "contact":
+              p.targetX = width / 2 + (Math.random() - 0.5) * 300;
+              p.targetY = height * 0.8 + (Math.random() - 0.5) * 100;
+              break;
+            default:
+              p.targetX = null;
+              p.targetY = null;
+          }
+        });
+      }
+
+      updateParticleTargets();
+
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+
+        const maxDistance = 120;
+        const opacityMultiplier = 1.0;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          if (p.targetX !== null && p.targetY !== null) {
+            const dx = p.targetX - p.x;
+            const dy = p.targetY - p.y;
+            p.x += dx * (prefersReducedMotion ? 0.01 : 0.02);
+            p.y += dy * (prefersReducedMotion ? 0.01 : 0.02);
+          } else {
+            p.x += p.vx * (prefersReducedMotion ? 0.2 : 1);
+            p.y += p.vy * (prefersReducedMotion ? 0.2 : 1);
+          }
+
+          p.x += (Math.random() - 0.5) * 0.2;
+          p.y += (Math.random() - 0.5) * 0.2;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+        }
+
+        if (currentScene !== "problem" && currentScene !== "founder" && currentScene !== "company") {
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = particles[i].x - particles[j].x;
+              const dy = particles[i].y - particles[j].y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+
+              if (dist < maxDistance) {
+                const alpha = (1 - dist / maxDistance) * 0.15 * opacityMultiplier;
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(160, 174, 192, ${alpha})`;
+                ctx.lineWidth = 0.5;
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+
+        ctx.fillStyle = `rgba(113, 128, 150, ${0.3 * opacityMultiplier})`;
+        for (let i = 0; i < particles.length; i++) {
+          ctx.beginPath();
+          ctx.arc(particles[i].x, particles[i].y, particles[i].radius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(render);
+      }
+
+      render();
+    });
+  </script>
+</body>
+</html>
