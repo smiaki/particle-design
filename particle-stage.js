@@ -49,6 +49,7 @@
     proof:         { layout: "nodes3d", arrange: "cards",  groups: 5, structure: 0.94, dot: 0.97, link: 0.0, dist: 0.064, speed: 1.00, opacity: 1.00, shapeScale: 0.070, rotSpd: 0.0072 },
     "future-eggs": { layout: "eggs",     groups: 3, structure: 0.80, dot: 0.88, link: 0.40, dist: 0.085, speed: 0.85, opacity: 1.00 },
     founder:       { layout: "cloud",    groups: 1, structure: 0.12, dot: 0.42, link: 0.14, dist: 0.090, speed: 0.60, opacity: 0.55 },
+    news:          { layout: "groups",   groups: 3, structure: 0.50, dot: 0.70, link: 0.28, dist: 0.100, speed: 0.80, opacity: 0.80 },
     company:       { layout: "cloud",    groups: 1, structure: 0.12, dot: 0.42, link: 0.14, dist: 0.090, speed: 0.60, opacity: 0.55 },
     contact:       { layout: "converge", groups: 1, structure: 0.66, dot: 0.82, link: 0.42, dist: 0.140, speed: 0.80, opacity: 1.00 }
   };

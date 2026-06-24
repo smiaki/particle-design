@@ -9,6 +9,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Export bundles for review (not part of the site)
+*.zip
+
 # Claude Code local preview config (not part of the site)
 .claude/launch.json
 

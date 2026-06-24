@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>コーポレートサイトを公開しました ｜ News ｜ Particle design株式会社</title>
+<meta name="description" content="Particle design株式会社 コーポレートサイトを公開しました。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://particle-design.co.jp/news-site-launch.html">
+<meta name="theme-color" content="#111111">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* News article — quiet document layout on the same design system */
+  .legal-wrap { max-width: 48rem; margin-inline: auto; padding-block: clamp(7rem, 12vh, 10rem) clamp(4rem, 9vh, 7rem); }
+  .legal-back {
+    position: fixed; top: clamp(1.2rem, 3vw, 2rem); left: var(--gutter); z-index: 50;
+    display: inline-flex; align-items: center; gap: .6em;
+    font-size: .82rem; letter-spacing: .04em; color: var(--ink-soft);
+    background: rgba(255,255,255,.72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: .6em 1.1em; cursor: pointer; text-decoration: none;
+    transition: color .3s ease, border-color .3s ease, background .3s ease;
+  }
+  .legal-back:hover { color: var(--ink); border-color: var(--line-mid); background: rgba(255,255,255,.95); }
+  .legal-back .arrow { transition: transform .3s ease; }
+  .legal-back:hover .arrow { transform: translateX(-4px); }
+
+  .article-head { margin-bottom: clamp(2.6rem, 5vw, 4rem); border-bottom: 1px solid var(--line); padding-bottom: clamp(1.8rem, 3vw, 2.4rem); }
+  .article-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; }
+  .article-meta .news-date { font-size: .8125rem; letter-spacing: .04em; color: var(--muted); }
+  .article-meta .news-cat {
+    font-size: .75rem; letter-spacing: .04em; color: var(--ink-soft);
+    border: 1px solid var(--line-mid); border-radius: 999px; padding: .15rem .7rem;
+  }
+  .article-head h1 {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.45; letter-spacing: -0.02em; margin: 0; color: var(--ink);
+  }
+
+  /* Article body */
+  .article-body p { margin: 0 0 1.4rem; font-size: clamp(.92rem, 1.05vw, 1rem); line-height: 2.05; color: var(--ink-soft); }
+  .article-body p:last-child { margin-bottom: 0; }
+  .article-figure { margin: 0 0 clamp(2rem, 4vw, 2.8rem); }
+  .article-figure img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--line); border-radius: var(--radius);
+  }
+  .article-figure figcaption { margin-top: .8rem; font-size: .8rem; letter-spacing: .02em; color: var(--muted); text-align: center; }
+  .article-link { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-mid); }
+  .article-link:hover { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<a class="legal-back" id="backBtn" href="news.html"><span class="arrow">←</span>ニュース一覧へ</a>
+
+<main>
+  <div class="shell legal-wrap">
+    <div class="article-head">
+      <div class="article-meta">
+        <time class="news-date" datetime="2026-06-01">2026.06.01</time>
+        <span class="news-cat">お知らせ</span>
+      </div>
+      <h1>コーポレートサイトを公開しました。</h1>
+    </div>
+
+    <div class="article-body">
+      <figure class="article-figure">
+        <img src="news-site-launch-hero.png" alt="Particle design株式会社 コーポレートサイト トップページ" loading="lazy">
+      </figure>
+      <p>このたび、Particle design株式会社のコーポレートサイトを自社開発し、公開いたしました。</p>
+      <p>本サイトでは、私たちの理念や事業内容、支援領域についてご紹介しています。ぜひ<a class="article-link" href="index.html">トップページ</a>もご覧ください。</p>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
