@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ ｜ Particle design株式会社</title>
+<meta name="description" content="Particle design株式会社へのお問い合わせフォームです。新規事業の構想、プロジェクトの推進、業務やシステムに関する課題など、お気軽にご相談ください。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://particle-design.co.jp/contact.html">
+<meta name="theme-color" content="#111111">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=20260624">
+<style>
+  /* Contact form — quiet document layout on the same design system */
+  .legal-wrap { max-width: 44rem; margin-inline: auto; padding-block: clamp(7rem, 12vh, 10rem) clamp(4rem, 9vh, 7rem); }
+  .legal-back {
+    position: fixed; top: clamp(1.2rem, 3vw, 2rem); left: var(--gutter); z-index: 50;
+    display: inline-flex; align-items: center; gap: .6em;
+    font-size: .82rem; letter-spacing: .04em; color: var(--ink-soft);
+    background: rgba(255,255,255,.72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: .6em 1.1em; cursor: pointer; text-decoration: none;
+    transition: color .3s ease, border-color .3s ease, background .3s ease;
+  }
+  .legal-back:hover { color: var(--ink); border-color: var(--line-mid); background: rgba(255,255,255,.95); }
+  .legal-back .arrow { transition: transform .3s ease; }
+  .legal-back:hover .arrow { transform: translateX(-4px); }
+
+  .legal-head { margin-bottom: clamp(2.2rem, 4vw, 3rem); }
+  .legal-head .eyebrow { justify-content: flex-start; }
+  .legal-head h1 {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(1.9rem, 4vw, 2.9rem); line-height: 1.4; letter-spacing: -0.02em; margin: 0; color: var(--ink);
+  }
+  .legal-lead { font-weight: 400; font-size: clamp(.92rem, 1.05vw, 1rem); line-height: 2.0; color: var(--ink-soft); margin: 0 0 clamp(2.4rem, 4vw, 3.2rem); }
+
+  /* Form */
+  .form-field { margin-bottom: 1.8rem; }
+  .form-field > label {
+    display: block; margin-bottom: .6rem;
+    font-size: .82rem; letter-spacing: .04em; color: var(--ink);
+  }
+  .form-field .req { color: #b91c1c; font-size: .78rem; margin-left: .4rem; }
+  .form-field .opt { color: var(--muted); font-size: .76rem; margin-left: .4rem; }
+  .form-control {
+    width: 100%; box-sizing: border-box;
+    font-family: var(--sans); font-size: .95rem; color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line-mid); border-radius: var(--radius);
+    padding: .85rem 1rem; line-height: 1.6;
+    transition: border-color .25s ease, box-shadow .25s ease;
+  }
+  .form-control::placeholder { color: var(--faint); }
+  .form-control:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
+  textarea.form-control { min-height: 9rem; resize: vertical; }
+  select.form-control { appearance: none; -webkit-appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 1.1rem) 1.25rem, calc(100% - .75rem) 1.25rem; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
+
+  .form-consent { display: flex; align-items: flex-start; gap: .7rem; margin: 0 0 2rem; font-size: .85rem; line-height: 1.7; color: var(--ink-soft); }
+  .form-consent input { margin-top: .25rem; flex: none; width: 1rem; height: 1rem; }
+  .form-consent a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-mid); }
+  .form-consent a:hover { color: var(--muted); }
+
+  /* honeypot */
+  .hp-field { position: absolute !important; left: -9999px !important; opacity: 0; height: 0; overflow: hidden; }
+
+  .form-submit { display: inline-flex; align-items: center; gap: .8em; border: none; cursor: pointer; font-family: var(--sans); }
+  .form-submit[disabled] { opacity: .55; cursor: not-allowed; }
+
+  .form-status { margin-top: 1.6rem; font-size: .9rem; line-height: 1.8; display: none; }
+  .form-status.is-success { display: block; color: var(--ink); border: 1px solid var(--line-mid); padding: 1.2rem 1.4rem; background: var(--bg-tint); }
+  .form-status.is-error { display: block; color: #b91c1c; }
+
+  .form-fallback { margin-top: 2.5rem; padding-top: 1.6rem; border-top: 1px solid var(--line); font-size: .82rem; line-height: 1.9; color: var(--muted); }
+  .form-fallback a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line-mid); }
+</style>
+</head>
+<body>
+
+<a class="legal-back" id="backBtn" href="/"><span class="arrow">←</span>戻る</a>
+
+<main>
+  <div class="shell legal-wrap">
+    <div class="legal-head">
+      <p class="eyebrow">Contact</p>
+      <h1>お問い合わせ</h1>
+    </div>
+
+    <p class="legal-lead">
+      新規事業の構想、プロジェクトの推進、業務やシステムに関する課題など、まずはお気軽にご相談ください。<br>
+      内容を確認のうえ、担当者より追ってご連絡いたします。
+    </p>
+
+    <!--
+      ============================================================
+      お問い合わせフォーム（Web3Forms 経由でメール送信）
+      ============================================================
+      access_key 設定済み。受信先は Web3Forms ダッシュボードの
+      フォーム設定（Recipient Email）で info@particle-design.co.jp
+      に設定すること。
+      ============================================================
+    -->
+    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+      <input type="hidden" name="access_key" value="1dcb9a69-63f0-4efc-96a3-b16aa82758eb">
+      <input type="hidden" name="subject" value="【お問い合わせ】Particle design コーポレートサイト">
+      <input type="hidden" name="from_name" value="Particle design お問い合わせフォーム">
+
+      <!-- honeypot (bot対策) -->
+      <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
+
+      <div class="form-field">
+        <label for="f-name">お名前<span class="req">必須</span></label>
+        <input class="form-control" type="text" id="f-name" name="お名前" required autocomplete="name" placeholder="例）山田 太郎">
+      </div>
+
+      <div class="form-field">
+        <label for="f-company">会社名・組織名<span class="opt">任意</span></label>
+        <input class="form-control" type="text" id="f-company" name="会社名" autocomplete="organization" placeholder="例）株式会社〇〇">
+      </div>
+
+      <div class="form-field">
+        <label for="f-email">メールアドレス<span class="req">必須</span></label>
+        <input class="form-control" type="email" id="f-email" name="email" required autocomplete="email" placeholder="例）name@example.com">
+      </div>
+
+      <div class="form-field">
+        <label for="f-phone">電話番号<span class="opt">任意</span></label>
+        <input class="form-control" type="tel" id="f-phone" name="電話番号" autocomplete="tel" placeholder="例）03-0000-0000">
+      </div>
+
+      <div class="form-field">
+        <label for="f-topic">相談テーマ<span class="opt">任意</span></label>
+        <select class="form-control" id="f-topic" name="相談テーマ">
+          <option value="">選択してください</option>
+          <option value="新規事業・事業構想">新規事業・事業構想</option>
+          <option value="プロジェクト推進・PMO">プロジェクト推進・PMO</option>
+          <option value="DX・データ活用">DX・データ活用</option>
+          <option value="業務設計・システム実装">業務設計・システム実装</option>
+          <option value="その他">その他</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="f-message">お問い合わせ内容<span class="req">必須</span></label>
+        <textarea class="form-control" id="f-message" name="お問い合わせ内容" required placeholder="ご相談内容をご記入ください。"></textarea>
+      </div>
+
+      <label class="form-consent">
+        <input type="checkbox" id="f-consent" required>
+        <span><a href="privacy-policy.html" target="_blank" rel="noopener">プライバシーポリシー</a>に同意のうえ送信します。</span>
+      </label>
+
+      <button class="btn-primary form-submit" type="submit" id="submitBtn">
+        送信する <span class="arrow">→</span>
+      </button>
+
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+
+    <p class="form-fallback">
+      フォームがうまく動作しない場合は、お手数ですが
+      <a href="mailto:info@particle-design.co.jp">info@particle-design.co.jp</a>
+      まで直接ご連絡ください。
+    </p>
+  </div>
+</main>
+
+<script>
+(function () {
+  var form = document.getElementById('contactForm');
+  var btn = document.getElementById('submitBtn');
+  var status = document.getElementById('formStatus');
+
+  function showStatus(type, msg) {
+    status.className = 'form-status is-' + type;
+    status.textContent = msg;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // 簡易バリデーション
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    btn.disabled = true;
+    var original = btn.innerHTML;
+    btn.textContent = '送信中…';
+
+    var data = Object.fromEntries(new FormData(form).entries());
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function (res) { return res.json().then(function (json) { return { ok: res.ok, json: json }; }); })
+      .then(function (r) {
+        if (r.ok && r.json.success) {
+          form.style.display = 'none';
+          showStatus('success', 'お問い合わせありがとうございます。内容を確認のうえ、担当者より追ってご連絡いたします。');
+        } else {
+          btn.disabled = false;
+          btn.innerHTML = original;
+          showStatus('error', '送信に失敗しました。お手数ですが時間をおいて再度お試しいただくか、info@particle-design.co.jp まで直接ご連絡ください。');
+        }
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.innerHTML = original;
+        showStatus('error', '送信に失敗しました。通信環境をご確認のうえ再度お試しいただくか、info@particle-design.co.jp まで直接ご連絡ください。');
+      });
+  });
+})();
+</script>
+
+</body>
+</html>
